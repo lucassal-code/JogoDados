@@ -4,8 +4,12 @@
  */
 package jogodados_lucas_sara;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -13,9 +17,10 @@ import javax.swing.JFrame;
  */
 public class JogoDados_Lucas_Sara {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static int contador = 0;
+    private static int parcial = 0;
+    private static JLabel valorTxt, parcialTxt1, parcialTxt2;
+    
     public static void main(String[] args) {
         
         JFrame janela = new JFrame("Jogo de Dados");
@@ -45,6 +50,38 @@ public class JogoDados_Lucas_Sara {
         guardarBtn2.setSize(80, 50);
         guardarBtn2.setLocation(80, 400);
         janela.add(guardarBtn2);
+        
+        //valor dos dados
+        valorTxt = new JLabel("0");
+        janela.add(valorTxt);
+        valorTxt.setSize(60, 40);
+        valorTxt.setLocation(400, 400);
+        
+        //texto do parcial 1
+        parcialTxt1 = new JLabel("0");
+        janela.add(parcialTxt1);
+        parcialTxt1.setSize(60, 40);
+        parcialTxt1.setLocation(400, 400);
+        
+        //ação ocorrida no botão 1
+        sortearBtn1.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Random gerador = new Random();
+                int dados = gerador.nextInt(6)+1;
+                parcial = parcial + dados;
+                valorTxt.setText(dados+"");
+                
+                switch(dados){
+                    case 1:
+                        //passar a vez
+                    case 6:
+                        //passa a vez e zera o parcial
+                        parcial = 0;
+                }
+            }
+        
+        });
         
     }
     
